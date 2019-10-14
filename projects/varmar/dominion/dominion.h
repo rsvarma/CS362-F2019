@@ -128,4 +128,19 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 /* Set array position of each player who won (remember ties!) to
    1, others to 0 */
 
+int handle_ambassador(int choice1, int choice2, int handPos, struct gameState *state, int currentPlayer);
+/* choice 1 holds hand position of card player is wanting to reveal
+   and choice 2 holds number of cards player wants to return to supply */
+
+int handle_mine(int choice1, int choice2, int handPos, struct gameState *state, int currentPlayer);
+/* choice 1 holds hand position of treasure player is trashing, choice 2 holds supply
+   number of treasure player wants to gain */ 
+
+int handle_baron(int choice1, struct gameState *state, int currentPlayer);
+/* choice 1 holds boolean for whether player wants to discard estate or not */
+
+int handle_tribute(struct gameState *state, int currentPlayer);
+
+int handle_minion(int choice1, int choice2, int handPos, struct gameState *state, int currentPlayer);
+/* choice 1 is flag for electing to take 2 coins, choice 2 is flag for electing to redraw */
 #endif
