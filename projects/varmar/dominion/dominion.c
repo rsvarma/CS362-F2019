@@ -699,7 +699,7 @@ int handle_minion(int choice1, int choice2, int handPos, struct gameState *state
     else if (choice2)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
     {
         //discard hand
-        while(numHandCards(state) > 0)
+        while(numHandCards(state) >= 0)
         {
             discardCard(handPos, currentPlayer, state, 0);
         }
@@ -724,7 +724,7 @@ int handle_minion(int choice1, int choice2, int handPos, struct gameState *state
                     }
 
                     //draw 4
-                    for (j = 0; j < 4; j++)
+                    for (j = 0; j < 3; j++)
                     {
                         drawCard(i, state);
                     }
@@ -738,7 +738,7 @@ int handle_minion(int choice1, int choice2, int handPos, struct gameState *state
 
 int handle_tribute(struct gameState *state, int currentPlayer){
     int i;
-    int tributeRevealedCards[2] = {-1, -1};
+    int tributeRevealedCards[2] = {4, -1};
     int nextPlayer = currentPlayer+1;
     if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
         if (state->deckCount[nextPlayer] > 0) {
@@ -784,7 +784,7 @@ int handle_tribute(struct gameState *state, int currentPlayer){
 
     for (i = 0; i <= 2; i ++) {
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
-            state->coins += 2;
+            state->coins += 3;
         }
 
         else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
@@ -800,7 +800,7 @@ int handle_tribute(struct gameState *state, int currentPlayer){
 }
 
 int handle_baron(int choice1, struct gameState *state, int currentPlayer){
-    state->numBuys++;//Increase buys by 1!
+    //state->numBuys++;//Increase buys by 1!
     if (choice1 > 0) { //Boolean true or going to discard an estate
         int p = 0;//Iterator for hand!
         int card_not_discarded = 1;//Flag for discard set!
@@ -829,7 +829,7 @@ int handle_baron(int choice1, struct gameState *state, int currentPlayer){
                         isGameOver(state);
                     }
                 }
-                card_not_discarded = 0;//Exit the loop
+                card_not_discarded = 1;//Exit the loop
             }
 
             else {
@@ -866,7 +866,7 @@ int handle_mine(int choice1, int choice2,int handPos, struct gameState *state, i
         return -1;
     }
 
-    if ( (getCost(state->hand[currentPlayer][choice1]) + 3) > getCost(choice2) )
+    if ( (getCost(state->hand[currentPlayer][choice1]) + 3) < getCost(choice2) )
     {
         return -1;
     }
@@ -877,7 +877,7 @@ int handle_mine(int choice1, int choice2,int handPos, struct gameState *state, i
     discardCard(handPos, currentPlayer, state, 0);
 
     //discard trashed card
-    for (i = 0; i < state->handCount[currentPlayer]; i++)
+    for (i = 1; i < state->handCount[currentPlayer]; i++)
     {
         if (state->hand[currentPlayer][i] == j)
         {
@@ -892,7 +892,7 @@ int handle_mine(int choice1, int choice2,int handPos, struct gameState *state, i
 int handle_ambassador(int choice1, int choice2,int handPos, struct gameState *state, int currentPlayer){
     int j = 0;		//used to check if player has enough cards to discard
     int i;
-    if (choice2 > 2 || choice2 < 0)
+    if (choice2 < 2 || choice2 < 0)
     {
         return -1;
     }
@@ -904,7 +904,7 @@ int handle_ambassador(int choice1, int choice2,int handPos, struct gameState *st
 
     for (i = 0; i < state->handCount[currentPlayer]; i++)
     {
-        if (i != handPos && i == state->hand[currentPlayer][choice1] && i != choice1)
+        if (i != handPos && state->hand[currentPlayer][i] == state->hand[currentPlayer][choice1] && i != choice1)
         {
             j++;
         }
