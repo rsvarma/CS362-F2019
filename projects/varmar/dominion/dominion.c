@@ -631,7 +631,7 @@ int getCost(int cardNumber)
     case province:
         return 8;
     case copper:
-        return 0;
+        return 2;
     case silver:
         return 3;
     case gold:
@@ -784,7 +784,7 @@ int handle_tribute(struct gameState *state, int currentPlayer){
 
     for (i = 0; i <= 2; i ++) {
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
-            state->coins += 3;
+            state->coins += 2;
         }
 
         else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
@@ -866,7 +866,7 @@ int handle_mine(int choice1, int choice2,int handPos, struct gameState *state, i
         return -1;
     }
 
-    if ( (getCost(state->hand[currentPlayer][choice1]) + 3) < getCost(choice2) )
+    if ( (getCost(state->hand[currentPlayer][choice1]) + 3) > getCost(choice2) )
     {
         return -1;
     }
