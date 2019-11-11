@@ -29,6 +29,14 @@ unittestresults: unittest1.c dominion.o rngs.o
 	echo -e "Testing Mine card (unittest3.c):\n" >>unittestresults.out
 	gcc -o unittest3 -g unittest3.c dominion.o rngs.o $(CFLAGS)
 	./unittest3 >> unittestresults.out
+
+	echo -e "Testing Baron card (unittest4.c):\n" >>unittestresults.out
+	gcc -o unittest4 -g unittest4.c dominion.o rngs.o $(CFLAGS)
+	./unittest4 >> unittestresults.out
+
+	echo -e "Testing Ambassador card (unittest5.c):\n" >>unittestresults.out
+	gcc -o unittest5 -g unittest5.c dominion.o rngs.o $(CFLAGS)
+	./unittest5 >> unittestresults.out
 	gcov dominion.c -b -f >> unittestresults.out
 
 runtests: testDrawCard 
