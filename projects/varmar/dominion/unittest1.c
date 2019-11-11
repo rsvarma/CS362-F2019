@@ -62,7 +62,7 @@ int test_minion(){
     //Test 2: User chooses to gain two coins from minion
     //Pre Game State Requirements: Player 0 has minion in their hand,3 coppers, and 1 estate
     //Other player has same game state as initialization
-    //Post Game State Requirements: Player 0 has 8 cards in their hand, 1 in deck, 1 in discard
+    //Post Game State Requirements: Player 0 has 9 cards in their hand, 1 in deck, 1 in discard
     //player 1 has 4 in hand, 1 in deck, 5 in discard
     initial = G;
     //set pre game state
@@ -84,7 +84,7 @@ int test_minion(){
 
     successful = 0;
     //check if post game state requirements are met
-    if(initial.handCount[0] != 8){
+    if(initial.handCount[0] != 9){
         printf("wrong number of cards in hand of player 0\n");
         successful = 1;
     }
