@@ -49,7 +49,7 @@ int test_ambassador(){
 
 
     successful = 0;
-    printf("Test 2: Player 0 reveals a copper, tries to return three coppers to supply:\n\n");
+    printf("Test 2l: Player 0 reveals a copper, tries to return three coppers to supply:\n\n");
     //Pre Game State Requirements: Player 0 has an ambassador in hand and 3 or more coppers
     //Post Game State Requirements: invalid action, action is denied
     initial = G;
