@@ -22,6 +22,21 @@ runtests: testDrawCard
 	cat dominion.c.gcov >> unittestresult.out
 
 
+randomtestresults: randomtestcard1.c dominion.o rngs.o
+	echo -e "Testing handle_minion() (randomtestcard1.c):\n" > randomtestresults.out
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1 >> randomtestresults.out
+
+	echo -e "Testing handle_baron() (randomtestcard2.c):\n" >> randomtestresults.out
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2 >> randomtestresults.out
+
+	echo -e "Testing handle_tribute() (randomtestcard3.c):\n" >> randomtestresults.out
+	gcc -o randomtestcard3 -g randomtestcard3.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard3 >> randomtestresults.out
+
+	gcov dominion.c -b -f >> randomtestresults.out
+
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 

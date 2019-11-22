@@ -829,7 +829,7 @@ int handle_baron(int choice1, struct gameState *state, int currentPlayer){
                         isGameOver(state);
                     }
                 }
-                card_not_discarded = 1;//Exit the loop
+                card_not_discarded = 0;//Exit the loop
             }
 
             else {

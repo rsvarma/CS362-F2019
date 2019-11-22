@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "DOMINION.C": "cpp"
+        "DOMINION.C": "cpp",
+        "RANDOMTESTCARD1.C": "cpp",
+        "RANDOMTESTCARD2.C": "cpp",
+        "RANDOMTESTCARD3.C": "cpp"
     }
 }
